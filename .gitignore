@@ -1,0 +1,9 @@
+# Logs
+logs
+*.log
+
+# Destination for build
+dest
+
+# Dependency directories
+node_modules
