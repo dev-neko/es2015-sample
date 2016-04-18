@@ -6,6 +6,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 
 const src  = ['./src/*.js'];
+const srcViews = ['./src/**/*.pug', '!./src/**/_*.pug'];
 
 gulp.task('build', () => {
   return gulp.src(src)
@@ -14,6 +15,13 @@ gulp.task('build', () => {
     .pipe($.babel())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./dest'));
+});
+
+gulp.task('views', () => {
+  return gulp.src(srcViews)
+    .pipe($.plumber())
+    .pipe($.pug({ pretty: true }))
+    .pipe(gulp.dest('./dest/'));
 });
 
 gulp.task('watch', () => {
