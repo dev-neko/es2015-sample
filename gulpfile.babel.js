@@ -5,7 +5,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 
-const src  = ['./src/sample.js'];
+const src  = ['./src/*.js'];
 
 gulp.task('build', () => {
   return gulp.src(src)
