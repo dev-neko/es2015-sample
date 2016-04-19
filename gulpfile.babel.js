@@ -5,7 +5,7 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 const $ = gulpLoadPlugins();
 
-const src  = ['./src/*.js'];
+const src  = ['./src/**/*.js'];
 const srcViews = ['./src/**/*.pug', '!./src/**/_*.pug'];
 
 gulp.task('build', () => {
