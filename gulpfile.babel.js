@@ -29,7 +29,8 @@ gulp.task('views', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(src, ['build']);
+  gulp.watch(src,      ['build']);
+  gulp.watch(srcViews, ['views']);
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['build', 'views']);
