@@ -11,6 +11,7 @@ const PATH = {
 
 const src  = ['./src/**/*.js'];
 const srcViews = ['./src/**/*.pug', '!./src/**/_*.pug'];
+const srcStyles = ['./src/**/*.s[ac]ss'];
 
 gulp.task('build', () => {
   return gulp.src(src)
@@ -28,9 +29,19 @@ gulp.task('views', () => {
     .pipe(gulp.dest(PATH.DEST));
 });
 
+gulp.task('sass', () => {
+  return gulp.src(srcStyles)
+    .pipe($.plumber())
+    .pipe($.sass({ 
+      outputStyle: 'expanded'
+    }))
+    .pipe(gulp.dest(PATH.DEST));
+});
+
 gulp.task('watch', () => {
   gulp.watch(src,      ['build']);
   gulp.watch(srcViews, ['views']);
+  gulp.watch(srcStyles,['sass']);
 });
 
-gulp.task('default', ['build', 'views']);
+gulp.task('default', ['build', 'views', 'sass']);
