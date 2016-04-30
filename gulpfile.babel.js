@@ -3,6 +3,7 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import del from 'del';
 const $ = gulpLoadPlugins();
 
 const PATH = {
@@ -12,6 +13,12 @@ const PATH = {
 const src  = ['./src/**/*.js'];
 const srcViews = ['./src/**/*.pug', '!./src/**/_*.pug'];
 const srcStyles = ['./src/**/*.s[ac]ss'];
+
+const destFiles = [`${PATH.DEST}/**/*.html`,  `${PATH.DEST}/**/*.css`, `${PATH.DEST}/**/*.js*`];
+
+gulp.task('clean', (cb) => {
+  del(destFiles, cb);
+});
 
 gulp.task('build', () => {
   return gulp.src(src)
@@ -44,4 +51,4 @@ gulp.task('watch', () => {
   gulp.watch(srcStyles,['sass']);
 });
 
-gulp.task('default', ['build', 'views', 'sass']);
+gulp.task('default', ['clean', 'build', 'views', 'sass']);
