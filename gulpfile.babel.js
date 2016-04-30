@@ -29,6 +29,14 @@ gulp.task('build', () => {
     .pipe(gulp.dest(PATH.DEST));
 });
 
+
+gulp.task('lint', () => {
+  return gulp.src(src)
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failOnError())
+    .pipe($.plumber.stop());
+});
 gulp.task('views', () => {
   return gulp.src(srcViews)
     .pipe($.plumber())
@@ -51,4 +59,4 @@ gulp.task('watch', () => {
   gulp.watch(srcStyles,['sass']);
 });
 
-gulp.task('default', ['clean', 'build', 'views', 'sass']);
+gulp.task('default', ['lint', 'clean', 'build', 'views', 'sass']);
