@@ -16,3 +16,4 @@ console.log(user1);
 
 const user2= getUsers('yu-suke', 'urameshi', 14);
 console.log(user2);
+
