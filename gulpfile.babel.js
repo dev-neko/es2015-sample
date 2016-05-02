@@ -11,7 +11,7 @@ const PATH = {
   DEST: './dest'
 };
 
-const src  = ['./src/**/*.js'];
+const srcJs  = ['./src/**/*.js'];
 const srcViews = ['./src/**/*.pug', '!./src/**/_*.pug'];
 const srcStyles = ['./src/**/*.s[ac]ss'];
 
@@ -24,7 +24,7 @@ gulp.task('clean', (cb) => {
 });
 
 gulp.task('build', ['lint'], () => {
-  return gulp.src(src)
+  return gulp.src(srcJs)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -34,7 +34,7 @@ gulp.task('build', ['lint'], () => {
 
 
 gulp.task('lint', () => {
-  return gulp.src(src)
+  return gulp.src(srcJs)
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
@@ -62,7 +62,7 @@ gulp.task('views-watch', ['views'], () => sync.reload());
 gulp.task('sass-watch',  ['sass'],  () => sync.reload());
 
 gulp.task('watch', ['serve'] ,() => {
-  gulp.watch(src,       ['js-watch']);
+  gulp.watch(srcJs,     ['js-watch']);
   gulp.watch(srcViews,  ['views-watch']);
   gulp.watch(srcStyles, ['sass-watch']);
 });
