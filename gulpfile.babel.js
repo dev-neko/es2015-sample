@@ -23,7 +23,7 @@ gulp.task('clean', (cb) => {
   del(destFiles, cb);
 });
 
-gulp.task('build', ['lint'], () => {
+gulp.task('transpile', ['lint'], () => {
   return gulp.src(srcJs)
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -56,8 +56,8 @@ gulp.task('sass', () => {
     .pipe(gulp.dest(PATH.DEST));
 });
 
-gulp.task('serve',       ['build'], () => sync.init({ server: './dest' }));
-gulp.task('js-watch',    ['build'], () => sync.reload());
+gulp.task('serve',       ['transpile'], () => sync.init({ server: './dest' }));
+gulp.task('js-watch',    ['transpile'], () => sync.reload());
 gulp.task('views-watch', ['views'], () => sync.reload());
 gulp.task('sass-watch',  ['sass'],  () => sync.reload());
 
@@ -68,4 +68,4 @@ gulp.task('watch', ['serve'] ,() => {
 });
 
 
-gulp.task('default', ['lint', 'clean', 'build', 'views', 'sass']);
+gulp.task('default', ['clean', 'transpile', 'views', 'sass']);
