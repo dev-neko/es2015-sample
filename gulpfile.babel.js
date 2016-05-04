@@ -5,7 +5,12 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import browserSync from 'browser-sync';
+import browserify  from 'browserify';
+import babelify    from 'babelify';
 const $ = gulpLoadPlugins();
+
+import buffer from 'vinyl-buffer';
+import source from 'vinyl-source-stream';
 
 const PATH = {
   DEST: './dest'
@@ -18,19 +23,42 @@ const srcStyles = ['./src/**/*.s[ac]ss'];
 const destFiles = [`${PATH.DEST}/**/*.html`,  `${PATH.DEST}/**/*.css`, `${PATH.DEST}/**/*.js*`];
 
 const sync = browserSync.create();
+const bundler = browserify('src/react.js');
+
+bundler.transform(babelify.configure({
+  sourceMapRelative: 'src'
+}));
+
+// On updates recompile
+bundler.on('update', bundle);
+
+function bundle() {
+  return bundler.bundle()
+    .on('error',  (error) => {
+      console.error('\nError: ', error.message, '\n');
+      this.emit('end');
+    })
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest(PATH.DEST))
+    ;
+}
+
+gulp.task('bundle', () => bundle());
 
 gulp.task('clean', (cb) => {
   del(destFiles, cb);
 });
 
-gulp.task('transpile', ['lint'], () => {
-  return gulp.src(srcJs)
-    .pipe($.plumber())
-    .pipe($.sourcemaps.init())
-    .pipe($.babel())
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATH.DEST));
-});
+gulp.task('transpile', ['lint'], () => bundle());
+//gulp.task('transpile', ['lint'], () => {
+//  return gulp.src(srcJs)
+//    .pipe($.plumber())
+//    .pipe($.sourcemaps.init())
+//    .pipe($.babel())
+//    .pipe($.sourcemaps.write('.'))
+//    .pipe(gulp.dest(PATH.DEST));
+//});
 
 
 gulp.task('lint', () => {
@@ -68,4 +96,4 @@ gulp.task('watch', ['serve'] ,() => {
 });
 
 
-gulp.task('default', ['clean', 'transpile', 'views', 'sass']);
+gulp.task('default', ['clean', 'bundle', 'views', 'sass']);
