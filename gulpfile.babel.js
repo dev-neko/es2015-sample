@@ -3,14 +3,17 @@
 
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+
+import ifElse from 'gulp-if-else';
 import del from 'del';
 import browserSync from 'browser-sync';
 import browserify  from 'browserify';
 import babelify    from 'babelify';
-const $ = gulpLoadPlugins();
 
 import buffer from 'vinyl-buffer';
 import source from 'vinyl-source-stream';
+
+const $ = gulpLoadPlugins();
 
 const PATH = {
   DEST: './dest'
@@ -40,7 +43,7 @@ function bundle() {
     })
     .pipe(source('bundle.js'))
     .pipe(buffer())
-    .pipe($.uglify())
+    .pipe(ifElse(process.env.NODE_ENV === 'production', $.uglify))
     .pipe(gulp.dest(PATH.DEST))
     ;
 }
