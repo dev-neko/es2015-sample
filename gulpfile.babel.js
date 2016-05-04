@@ -23,7 +23,7 @@ const srcStyles = ['./src/**/*.s[ac]ss'];
 const destFiles = [`${PATH.DEST}/**/*.html`,  `${PATH.DEST}/**/*.css`, `${PATH.DEST}/**/*.js*`];
 
 const sync = browserSync.create();
-const bundler = browserify('src/react.js');
+const bundler = browserify('src/app.js');
 
 bundler.transform(babelify.configure({
   sourceMapRelative: 'src'
