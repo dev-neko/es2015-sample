@@ -2,8 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
 
+import Counter from './scripts/components/counter';
+
 const app = (
-  <h2> React here!! </h2>
+  <div>
+    <h2> React here!! </h2>
+    <Counter />
+  </div>
 )
 
 jQuery(function() {
