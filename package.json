@@ -8,6 +8,12 @@
     "start": "gulp watch",
     "build": "gulp"
   },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
   "author": "dev-neko",
   "license": "MIT",
   "devDependencies": {
