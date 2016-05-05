@@ -9,9 +9,13 @@
     "build": "gulp"
   },
   "ava": {
+    "files": [
+      "test/**/*.{js,jsx}"
+    ],
     "require": [
       "babel-register"
     ],
+    "failFast": true,
     "babel": "inherit"
   },
   "author": "dev-neko",
