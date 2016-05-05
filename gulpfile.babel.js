@@ -1,6 +1,3 @@
-//const gulp = require('gulp');
-//const $    = require('gulp-load-plugins')();
-
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 
@@ -66,12 +63,14 @@ gulp.task('transpile', ['lint'], () => bundle());
 
 
 gulp.task('lint', () => {
-  return gulp.src(srcJs)
+  const lintTargets = [...srcJs, 'gulpfile.babel.js'];
+  return gulp.src(lintTargets)
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
     .pipe($.plumber.stop());
 });
+
 gulp.task('views', () => {
   return gulp.src(srcViews)
     .pipe($.plumber())
