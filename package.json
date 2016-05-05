@@ -25,6 +25,10 @@
     "failFast": true,
     "babel": "inherit"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dev-neko/es2015-sample.git"
+  },
   "author": "dev-neko",
   "license": "MIT",
   "devDependencies": {
