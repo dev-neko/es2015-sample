@@ -5,7 +5,8 @@
   "main": "sample.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp watch"
+    "start": "gulp watch",
+    "build": "gulp"
   },
   "author": "dev-neko",
   "license": "MIT",
