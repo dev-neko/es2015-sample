@@ -19,6 +19,9 @@
     "files": [
       "test/**/*.{js,jsx}"
     ],
+    "source": [
+      "src/scripts/**/*.{js,jsx}"
+    ],
     "require": [
       "babel-register"
     ],
@@ -41,6 +44,7 @@
     "browser-sync": "^2.12.5",
     "browserify": "^13.0.0",
     "del": "^2.2.0",
+    "enzyme": "^2.2.0",
     "eslint-plugin-react": "^5.0.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -55,6 +59,7 @@
     "jquery": "^2.2.3",
     "pug": "^2.0.0-alpha6",
     "react": "^15.0.2",
+    "react-addons-test-utils": "^15.0.2",
     "react-dom": "^15.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
