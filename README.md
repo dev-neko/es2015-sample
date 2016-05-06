@@ -23,9 +23,12 @@ I manage Node.js by ndenv of anyenv.
 $ npm i
 
 # To build src 
-$ gulp
+$ npm run build
 
-# To watch any changes of sources and build automatically when sources are changed.
-$ gulp watch
+# To run tests
+$ npm test
+
+# To start app
+$ npm start
 
 ```
