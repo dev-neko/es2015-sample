@@ -47,10 +47,6 @@ function bundle() {
 
 gulp.task('bundle', () => bundle());
 
-gulp.task('clean', (cb) => {
-  del(destFiles, cb);
-});
-
 gulp.task('transpile', ['lint'], () => bundle());
 //gulp.task('transpile', ['lint'], () => {
 //  return gulp.src(srcJs)
@@ -61,7 +57,6 @@ gulp.task('transpile', ['lint'], () => bundle());
 //    .pipe(gulp.dest(PATH.DEST));
 //});
 
-
 gulp.task('lint', () => {
   const lintTargets = [...srcJs, 'gulpfile.babel.js'];
   return gulp.src(lintTargets)
@@ -69,6 +64,10 @@ gulp.task('lint', () => {
     .pipe($.eslint.format())
     .pipe($.eslint.failOnError())
     .pipe($.plumber.stop());
+});
+
+gulp.task('clean', (cb) => {
+  del(destFiles, cb);
 });
 
 gulp.task('views', () => {
@@ -99,4 +98,4 @@ gulp.task('watch', ['serve'] ,() => {
 });
 
 
-gulp.task('default', ['clean', 'bundle', 'views', 'sass']);
+gulp.task('default', ['clean', 'transpile', 'views', 'sass']);
